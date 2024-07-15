@@ -1,0 +1,50 @@
+# Ignorar arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos e diretórios de configuração do VS Code
+.vscode/
+*.code-workspace
+
+# Ignorar arquivos de compilação
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignorar logs e arquivos temporários
+*.log
+*.tmp
+*.bak
+
+# Ignorar arquivos e diretórios de Jupyter
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+output/
+
+# Ignorar arquivos de ambiente virtual
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Ignorar arquivos de banco de dados
+*.sqlite3
+
+# Ignorar arquivos de dados grandes
+*.h5
+*.csv
+*.tsv
+
+# Ignorar arquivos e diretórios de builds
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Ignorar arquivos do sistema operacional
+*.swp
+*~
