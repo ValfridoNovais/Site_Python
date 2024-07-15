@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="cadastro-auditoria">
+    <h2>Cadastrar Auditoria</h2>
+    <form method="POST">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="date">Data:</label>
+        <input type="date" id="date" name="date" required>
+        <button type="submit">Salvar</button>
+    </form>
+</div>
+{% endblock %}
