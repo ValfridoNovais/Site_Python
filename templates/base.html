@@ -1,3 +1,4 @@
+<!-- base.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,23 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="sidebar">
-        <div class="logo-details">
-            <span class="logo_name">MMPG Novais</span>
-        </div>
-        <ul class="nav-links">
-            <li>
-                <a href="{{ url_for('dashboard') }}" class="active">
-                    <span class="links_name">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ url_for('cadastro_auditoria') }}">
-                    <span class="links_name">Cadastrar Auditoria</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+    {% include 'sidebar.html' %}
     <div class="main-content">
         {% block content %}{% endblock %}
     </div>

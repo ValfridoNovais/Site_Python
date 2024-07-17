@@ -3,21 +3,24 @@
 {% block content %}
 <div class="dashboard">
     <h2>Dashboard</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Data</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for auditoria in auditorias %}
-                <tr>
-                    <td>{{ auditoria.name }}</td>
-                    <td>{{ auditoria.date }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <form action="{{ url_for('dashboard') }}" method="get">
+        Data Início: <input type="date" name="start_date">
+        Data Fim: <input type="date" name="end_date">
+        Agrupar por:
+        <select name="group_by">
+            <option value="cia_pm">CIA PM</option>
+            <option value="pelotao">Pelotão</option>
+            <option value="nome_municipio">Município</option>
+        </select>
+        <button type="submit">Atualizar Gráfico</button>
+    </form>
+    <div id="chart"></div>
 </div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript">
+    var figures = {{ plot|tojson|safe }};
+    Plotly.react('chart', figures.data, figures.layout);
+</script>
+
 {% endblock %}

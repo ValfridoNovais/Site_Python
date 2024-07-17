@@ -1,0 +1,23 @@
+<!-- sidebar.html -->
+<div class="sidebar">
+    <div class="logo-details">
+        <span class="logo_name">MMPG Novais</span>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="{{ url_for('dashboard') }}">
+                <span class="links_name">Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('cadastro_auditoria') }}">
+                <span class="links_name">Cadastrar Auditoria</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('logout') }}">
+                <span class="links_name">Sair</span>
+            </a>
+        </li>
+    </ul>
+</div>
