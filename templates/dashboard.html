@@ -4,13 +4,13 @@
 <div class="dashboard">
     <h2>Dashboard</h2>
     <form action="{{ url_for('dashboard') }}" method="get">
-        Data Início: <input type="date" name="start_date">
-        Data Fim: <input type="date" name="end_date">
+        Data Início: <input type="date" name="start_date" value="{{ request.args.get('start_date', '') }}">
+        Data Fim: <input type="date" name="end_date" value="{{ request.args.get('end_date', '') }}">
         Agrupar por:
         <select name="group_by">
-            <option value="cia_pm">CIA PM</option>
-            <option value="pelotao">Pelotão</option>
-            <option value="nome_municipio">Município</option>
+            <option value="cia_pm" {% if request.args.get('group_by', '') == 'cia_pm' %}selected{% endif %}>CIA PM</option>
+            <option value="pelotao" {% if request.args.get('group_by', '') == 'pelotao' %}selected{% endif %}>Pelotão</option>
+            <option value="nome_municipio" {% if request.args.get('group_by', '') == 'nome_municipio' %}selected{% endif %}>Município</option>
         </select>
         <button type="submit">Atualizar Gráfico</button>
     </form>
@@ -22,5 +22,4 @@
     var figures = {{ plot|tojson|safe }};
     Plotly.react('chart', figures.data, figures.layout);
 </script>
-
 {% endblock %}

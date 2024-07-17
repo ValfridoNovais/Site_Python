@@ -50,17 +50,17 @@ def logout():
 def dashboard():
     df = pd.read_csv('data/auditorias.csv', encoding='latin1')
     df['data_fato'] = pd.to_datetime(df['data_fato'])
-    df['numero_ocorrencia'] = 1  # Supondo que cada linha é uma ocorrência
+    df['numero_ocorrencia'] = 1  # Ajuste conforme a necessidade real
 
     start_date = request.args.get('start_date')
     end_date = request.args.get('end_date')
     group_by = request.args.get('group_by', 'cia_pm')
 
     if start_date and end_date:
-        df = df[(df['data_fato'] >= start_date) & (df['data_fato'] <= end_date)]
+        df = df[(df['data_fato'] >= pd.to_datetime(start_date)) & (df['data_fato'] <= pd.to_datetime(end_date))]
 
     plot = create_plot(df, group_by_field=group_by)
-    return render_template('dashboard.html', plot=plot)
+    return render_template('dashboard.html', plot=plot, start_date=start_date, end_date=end_date, group_by=group_by)
 
 @app.route('/cadastro_auditoria', methods=['GET', 'POST'])
 @login_required
@@ -73,12 +73,11 @@ def cadastro_auditoria():
         return redirect(url_for('dashboard'))
     return render_template('cadastro_auditoria.html')
 
-#função para criar o gráfico:
 def create_plot(data_frame, group_by_field='cia_pm'):
-    fig = px.bar(data_frame, x=group_by_field, y='numero_ocorrencia', title=f'Ocorrências por {group_by_field}')
+    grouped = data_frame.groupby(group_by_field)['numero_ocorrencia'].count().reset_index()
+    fig = px.bar(grouped, x=group_by_field, y='numero_ocorrencia', title=f'Ocorrências por {group_by_field}')
     graphJSON = fig.to_json()
     return graphJSON
-
 
 if __name__ == '__main__':
     app.run(debug=True)
