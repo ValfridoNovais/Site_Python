@@ -20,6 +20,7 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script type="text/javascript">
     var figures = {{ plot|tojson|safe }};
+    console.log("Dados do gráfico:", figures);  // Adiciona esta linha para verificar os dados no console do navegador
     Plotly.react('chart', figures.data, figures.layout);
 </script>
 {% endblock %}
