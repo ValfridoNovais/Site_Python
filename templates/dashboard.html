@@ -1,26 +1,20 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<div class="dashboard">
-    <h2>Dashboard</h2>
-    <form action="{{ url_for('dashboard') }}" method="get">
-        Data Início: <input type="date" name="start_date" value="{{ request.args.get('start_date', '') }}">
-        Data Fim: <input type="date" name="end_date" value="{{ request.args.get('end_date', '') }}">
-        Agrupar por:
-        <select name="group_by">
-            <option value="cia_pm" {% if request.args.get('group_by', '') == 'cia_pm' %}selected{% endif %}>CIA PM</option>
-            <option value="pelotao" {% if request.args.get('group_by', '') == 'pelotao' %}selected{% endif %}>Pelotão</option>
-            <option value="nome_municipio" {% if request.args.get('group_by', '') == 'nome_municipio' %}selected{% endif %}>Município</option>
-        </select>
-        <button type="submit">Atualizar Gráfico</button>
-    </form>
-    <div id="chart"></div>
-</div>
-
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script type="text/javascript">
-    var figures = {{ plot|tojson|safe }};
-    console.log("Dados do gráfico:", figures);  // Adiciona esta linha para verificar os dados no console do navegador
-    Plotly.react('chart', figures.data, figures.layout);
-</script>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <div>{{ plot1|safe }}</div>
+        <div>{{ plot2|safe }}</div>
+    </div>
+</body>
+</html>
